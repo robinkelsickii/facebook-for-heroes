@@ -104,18 +104,18 @@ $sql = "UPDATE heroes SET name='$name',about_me='$about_me',biography='$bio' WHE
 switch ($action) {
   case "create":
   createHero($_POST["name"], $_POST["about_me"], $_POST["bio"]);
-    echo "Your favorite color is red!";
+    echo "Hero has been created";
     break;
   case "read":
   readHero();
-    echo "Your favorite color is blue!";
+    echo "These are the Heroes";
     break;
   case "update":
   updateHero($_POST["name"], $_POST["about_me"], $_POST["bio"], $_POST["id"]); 
-    echo "Your favorite color is green!";
+    echo $name + "has been updated";
     break;
     case "delete":
-    echo "Your favorite color is green!";
+    echo "Hero has been deleted";
     break;
   default:
     echo "Your favorite color is neither red, blue, nor green!";
