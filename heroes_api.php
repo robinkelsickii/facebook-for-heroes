@@ -75,6 +75,32 @@ if (mysqli_num_rows($result) > 0) {
 mysqli_close($conn);
 }
 
+function updateHero($name, $about_me, $bio, $id){
+ $servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sql-heroes";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
+
+$sql = "UPDATE heroes SET name='$name',about_me='$about_me',biography='$bio' WHERE heroes.id=$id"; 
+
+    if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+    } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    echo  $name . $about_me . $bio;
+    mysqli_close($conn);
+} 
+
 switch ($action) {
   case "create":
   createHero($_POST["name"], $_POST["about_me"], $_POST["bio"]);
@@ -85,6 +111,7 @@ switch ($action) {
     echo "Your favorite color is blue!";
     break;
   case "update":
+  updateHero($_POST["name"], $_POST["about_me"], $_POST["bio"], $_POST["id"]); 
     echo "Your favorite color is green!";
     break;
     case "delete":
