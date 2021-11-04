@@ -12,7 +12,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "first connect";
+// echo "first connect";
 }
 connectDb(); 
 
@@ -142,7 +142,7 @@ switch ($action) {
     echo "Hero has been deleted";
     break;
   default:
-    echo "Your favorite color is neither red, blue, nor green!";
+        http_response_code(404);
+        echo "Not found.";
 }
-
 ?>
