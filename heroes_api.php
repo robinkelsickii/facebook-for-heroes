@@ -101,29 +101,27 @@ $sql = "UPDATE heroes SET name='$name',about_me='$about_me',biography='$bio' WHE
     mysqli_close($conn);
 } 
 
-function deleteHero() {
+function deleteHero($id){
     $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sql-heroes";
+    $username = "root";
+    $password = "";
+    $dbname = "sql-heroes";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    }
 
-// sql to delete a record
-$sql = "DELETE FROM heroes WHERE id > 0";
+    // sql to delete a record
+    $sql = "DELETE FROM heroes WHERE id = $id";
 
-if ($conn->query($sql) === TRUE) {
-  echo "Record deleted successfully";
-} else {
-  echo "Error deleting record: " . $conn->error;
-}
-
-$conn->close();
+    if ($conn->query($sql) === TRUE) {
+    echo "Record deleted successfully";
+    } else {
+    echo "Error deleting record: " . $conn->error;
+    }
 }
 
 switch ($action) {
@@ -140,6 +138,7 @@ switch ($action) {
     echo $name + "has been updated";
     break;
     case "delete":
+    deleteHero($_GET["id"]);
     echo "Hero has been deleted";
     break;
   default:
